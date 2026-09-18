@@ -3,26 +3,24 @@ import React, { useState } from "react";
 export function SearchForm() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Google検索ポップアップを開く関数
-  const handleGoogleSearch = (e) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
-
-    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-
-    // デバッグ用にコンソールに出力されるか確認
-    console.log("検索URL:", searchUrl);
-
-    // シンプルに新しいタブで開く
-    window.open(searchUrl, "_blank");
-  };
-
   return (
-    <form className="googleForm" onSubmit={handleGoogleSearch}>
+    <form
+      className="googleForm"
+      action="https://www.google.com/search"
+      method="GET"
+      target="_blank"
+      onSubmit={(e) => {
+        // 空文字のときは検索させずにストップする
+        if (!searchQuery.trim()) {
+          e.preventDefault();
+        }
+      }}
+    >
       <div className="inputWrapper">
         <input
           className="googleInput"
           type="text"
+          name="q" /* ← ★Googleがキーワードとして受け取るための超重要パラメータ名 */
           placeholder="調べたいプラモデルを入力（例：HG Zガンダム）"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
