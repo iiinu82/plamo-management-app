@@ -50,10 +50,10 @@ export function SortableItem({ id, name, price, url, onEdit }) {
         {url && (
           <a
             href={url}
-            onClick={handleOpenPopup}
-
+            target="_blank"
+            rel="noopener noreferrer"
             className="item-link-btn"
-            onPointerDown={(e) => e.stopPropagation()}
+            onPointerDown={(e) => e.stopPropagation()} // ドラッグ暴発防止だけ残す
             title="公式サイトを開く"
           >
             link

@@ -10,8 +10,11 @@ export function SearchForm() {
 
     const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
 
-    // サイズ指定を外し、安全な新しいタブとして開く（これならブロックされません）
-    window.open(searchUrl, "_blank", "noopener,noreferrer");
+    // デバッグ用にコンソールに出力されるか確認
+    console.log("検索URL:", searchUrl);
+
+    // シンプルに新しいタブで開く
+    window.open(searchUrl, "_blank");
   };
 
   return (
