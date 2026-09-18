@@ -10,25 +10,8 @@ export function SearchForm() {
 
     const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
 
-    const windowFeatures =
-      "width=1000,height=700,left=500,top=100,resizable=yes,scrollbars=yes";
-
-    // ★ 第3引数に windowFeatures を渡しつつ、第2引数のウィンドウ名を英数字のみ（スペース無し）にする
-    const newWindow = window.open(
-      searchUrl,
-      "GoogleSearchPopup",
-      windowFeatures,
-    );
-
-    if (
-      !newWindow ||
-      newWindow.closed ||
-      typeof newWindow.closed == "undefined"
-    ) {
-      alert(
-        "ポップアップがブロックされました。ブラウザの設定でポップアップを許可してください。",
-      );
-    }
+    // サイズ指定を外し、安全な新しいタブとして開く（これならブロックされません）
+    window.open(searchUrl, "_blank", "noopener,noreferrer");
   };
 
   return (

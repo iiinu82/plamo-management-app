@@ -18,15 +18,13 @@ export function SortableItem({ id, name, price, url, onEdit }) {
   };
 
   const handleOpenPopup = (e) => {
-    e.preventDefault(); // 通常のリンク動作（新しいタブで開く）をストップ
+    e.preventDefault(); // デフォルトのリンク動作を制御
     if (!url) return;
 
-    // Google検索のときと同じサイズ・位置を指定
-    const windowFeatures =
-      "width=1000,height=700,left=500,top=100,resizable=yes,scrollbars=yes";
-
-    window.open(url, "ProductPopup", windowFeatures);
+    // ポップアップ指定を外し、安全な新しいタブで開く
+    window.open(url, "_blank", "noopener,noreferrer");
   };
+
   return (
     <div
       ref={setNodeRef}
