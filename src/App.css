@@ -1,0 +1,483 @@
+/* --- 全体のベース（クールなダーク・メタリック調） --- */
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background-color: #2c437a; /* 落ち着いたダークスレート */
+  color: #e2e8f0;
+}
+
+/* アプリ全体のコンテナ（チタン調グラデーション＆シャープな枠線） */
+.appContainer {
+  max-width: 1240px;
+  margin: 20px auto;
+  padding: 20px 40px;
+  background: linear-gradient(145deg, #1e2530, #161b22);
+  border: 1px solid #475569;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 1.75rem;
+  color: #f8fafc;
+  letter-spacing: 0.05em;
+  border-left: 4px solid #38bdf8;
+  padding-left: 12px;
+}
+
+.addArea {
+  display: flex;
+  align-items: center;
+}
+
+.addBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #0284c7, #0369a1);
+  color: #fff;
+  border: 1px solid #38bdf8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addBtn:hover {
+  background: #0ea5e9;
+  transform: scale(1.05);
+}
+
+.addText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: 12px;
+  color: #cbd5e1;
+  letter-spacing: 0.03em;
+}
+
+.googleForm {
+  margin-bottom: 0; /* リストエリアと自然に繋げるため調整 */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* inputとバツボタンをまとめる親要素 */
+.inputWrapper {
+  position: relative; /* 子要素の絶対配置の基準にする */
+  display: flex;
+  align-items: center;
+}
+
+.googleInput {
+  width: 450px;
+  padding: 10px 36px 10px 14px; /* 右側にバツボタン分の余白（36px）をあけておく */
+  font-size: 15px;
+  background-color: #0f172a;
+  border: 1px solid #475569;
+  color: #f8fafc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.googleInput:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+/* 右端に配置するバツボタン */
+.clearBtn {
+  position: absolute;
+  right: 10px; /* 右端からの距離 */
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.clearBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.googleBtn {
+  padding: 10px 20px;
+  background: linear-gradient(to bottom, #334155, #1e293b);
+  color: #f8fafc;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.googleBtn:hover {
+  background: #475569;
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+/* 3カラムを横に並べるラッパー */
+.listArea {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* 各カラムのスタイル */
+.column {
+  background: linear-gradient(
+    145deg,
+    #2a3441,
+    #1e2530
+  ); /* ほんのりメタリックなグラデーション */
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border: 1px solid #475569; /* シルバー感のある明るめのボーダー */
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+}
+
+.column h3 {
+  margin: 0;
+  padding: 16px;
+  font-size: 16px;
+  border-bottom: 1px solid #475569;
+  background: linear-gradient(
+    to bottom,
+    #334155,
+    #1e2530
+  ); /* ヘッダーのグラデーション */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: #f1f5f9;
+  letter-spacing: 0.05em;
+}
+
+/* カラムの中身（ここがドロップを受け付ける領域） */
+.column-content {
+  padding: 12px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* 高さを確保してカラム内全体でドロップを検知できるようにする */
+  min-height: 450px;
+}
+
+/* 各アイテムのカードスタイル（シルバーメタリック風グラデーション） */
+.multi-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 左右に要素を配置 */
+  padding: 8px 10px;
+  background: linear-gradient(
+    135deg,
+    #222b36,
+    #1a212b
+  ); /* カード自体の微かなグラデーション */
+  border: 1px solid #475569;
+  border-radius: 6px;
+  cursor: grab;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.multi-item:hover {
+  background: linear-gradient(135deg, #2b3747, #222b36);
+  border-color: #38bdf8; /* ホバー時にスカイブルーがシャープに光る */
+}
+
+.multi-item:active {
+  cursor: grabbing;
+}
+
+.item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f8fafc;
+  white-space: normal;
+  word-break: break-all;
+  flex-grow: 1;
+  margin-right: 12px;
+}
+
+/* 価格とボタンをまとめるエリア */
+.item-right-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.item-price {
+  font-family: monospace;
+  font-weight: 600;
+  font-size: 14px;
+  color: #38bdf8; /* メタリックに映えるアイスブルー */
+}
+
+/* 「link」ボタンのスタイル */
+.item-link-btn {
+  width: 30px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #38bdf8;
+  background: linear-gradient(
+    to bottom,
+    rgba(56, 189, 248, 0.15),
+    rgba(56, 189, 248, 0.05)
+  );
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.item-link-btn:hover {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+/* 「変更」ボタンのスタイル */
+.item-edit-btn {
+  width: 30px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  font-size: 12px;
+  color: #4ade80;
+  background: linear-gradient(
+    to bottom,
+    rgba(74, 222, 128, 0.15),
+    rgba(74, 222, 128, 0.05)
+  );
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.item-edit-btn:hover {
+  color: #0f172a;
+  background: #4ade80;
+}
+
+/* 空のときの表示 */
+.empty-notice {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border: 2px dashed #475569;
+  padding: 30px 20px;
+  border-radius: 6px;
+  background: rgba(30, 41, 59, 0.3);
+}
+
+/* ドラッグ中のプレビュー（影） */
+.dragging-overlay {
+  background: linear-gradient(135deg, #334155, #1e293b);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid #38bdf8;
+  transform: rotate(2deg);
+}
+
+/* --- モーダルの背景（半透明のダーク幕） --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(
+    15,
+    23,
+    42,
+    0.6
+  ); /* 暗すぎない半透明のダークブルーグレー */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+  z-index: 1000; /* 他の要素より手前に表示する */
+}
+
+/* --- モーダル本体のウィンドウ（視認性の高い明るめグレー＆シルバー調） --- */
+.modal-content {
+  background-color: #1e293b; /* 視認性を保ちつつ重すぎないスレート色 */
+  border: 1px solid #475569; /* シャープなシルバー系の枠線 */
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+  color: #f8fafc;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #f8fafc;
+}
+
+/* --- フォームのレイアウト --- */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #cbd5e1; /* 読みやすい明るめのグレー */
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  background-color: #0f172a; /* 入力欄はコントラストをつけるために少し暗く */
+  border: 1px solid #475569;
+  color: #f8fafc;
+  border-radius: 6px;
+  outline: none;
+  font-family: inherit;
+  resize: vertical;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.form-group textarea {
+  white-space: pre-wrap; /* 改行を保持しつつ自動折り返しする */
+  word-break: break-all; /* 長い英単語などの途中でも綺麗に折り返す */
+}
+
+/* --- ボタンエリア --- */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.right-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  background-color: #334155;
+  color: #cbd5e1;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #475569;
+  color: #fff;
+}
+
+.submit-btn {
+  padding: 8px 20px;
+  background: linear-gradient(to bottom, #0284c7, #0369a1);
+  color: #fff;
+  border: 1px solid #38bdf8;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.submit-btn:hover {
+  background: #0ea5e9;
+}
+
+/* --- 削除ボタンのスタイル --- */
+.delete-btn {
+  padding: 8px 16px;
+  background-color: rgba(239, 68, 68, 0.15); /* ほんのり赤みがかった背景 */
+  color: #f87171; /* 視認性の良い明るめの赤文字 */
+  border: 1px solid rgba(239, 68, 68, 0.4); /* シャープな赤系ボーダー */
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.delete-btn:hover {
+  background-color: #ef4444; /* ホバー時はしっかりした赤に変化 */
+  color: #fff;
+  border-color: #ef4444;
+}
