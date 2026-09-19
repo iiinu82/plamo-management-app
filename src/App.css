@@ -29,12 +29,34 @@ body {
 }
 
 h1 {
-  margin-bottom: 20px;
-  font-size: 1.75rem;
+  margin: 0 0 24px 0;
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
   color: #f8fafc;
-  letter-spacing: 0.05em;
-  border-left: 4px solid #38bdf8;
-  padding-left: 12px;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.4));
+
+  border-left: 5px solid #f8f238;
+  padding-left: 14px;
+
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleSpan {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: normal;
+  letter-spacing: 0.1em;
 }
 
 .addArea {
@@ -73,22 +95,22 @@ h1 {
 }
 
 .googleForm {
-  margin-bottom: 0; /* リストエリアと自然に繋げるため調整 */
+  margin-bottom: 0;
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-/* inputとバツボタンをまとめる親要素 */
 .inputWrapper {
-  position: relative; /* 子要素の絶対配置の基準にする */
+  position: relative;
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 .googleInput {
   width: 450px;
-  padding: 10px 36px 10px 14px; /* 右側にバツボタン分の余白（36px）をあけておく */
+  padding: 10px 36px 10px 14px;
   font-size: 15px;
   background-color: #0f172a;
   border: 1px solid #475569;
@@ -101,15 +123,28 @@ h1 {
     box-shadow 0.2s;
 }
 
+.googleInputCategory {
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #475569;
+}
+
+.googleInputArea {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .googleInput:focus {
   border-color: #38bdf8;
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
 }
 
-/* 右端に配置するバツボタン */
 .clearBtn {
   position: absolute;
-  right: 10px; /* 右端からの距離 */
+  right: 10px;
   background: none;
   border: none;
   font-size: 18px;
@@ -158,14 +193,10 @@ h1 {
 
 /* 各カラムのスタイル */
 .column {
-  background: linear-gradient(
-    145deg,
-    #2a3441,
-    #1e2530
-  ); /* ほんのりメタリックなグラデーション */
+  background: linear-gradient(145deg, #2a3441, #1e2530);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  border: 1px solid #475569; /* シルバー感のある明るめのボーダー */
+  border: 1px solid #475569;
   display: flex;
   flex-direction: column;
   min-height: 500px;
@@ -176,43 +207,33 @@ h1 {
   padding: 16px;
   font-size: 16px;
   border-bottom: 1px solid #475569;
-  background: linear-gradient(
-    to bottom,
-    #334155,
-    #1e2530
-  ); /* ヘッダーのグラデーション */
+  background: linear-gradient(to bottom, #334155, #1e2530);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: #f1f5f9;
   letter-spacing: 0.05em;
 }
 
-/* カラムの中身（ここがドロップを受け付ける領域） */
 .column-content {
   padding: 12px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* 高さを確保してカラム内全体でドロップを検知できるようにする */
   min-height: 450px;
 }
 
-/* 各アイテムのカードスタイル（シルバーメタリック風グラデーション） */
 .multi-item {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 左右に要素を配置 */
+  justify-content: space-between;
   padding: 8px 10px;
-  background: linear-gradient(
-    135deg,
-    #222b36,
-    #1a212b
-  ); /* カード自体の微かなグラデーション */
-  border: 1px solid #475569;
+  background: linear-gradient(135deg, #222b36, #1a212b);
+  border: 1px solid #0ea5e9;
+
   border-radius: 6px;
   cursor: grab;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.25);
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -221,7 +242,27 @@ h1 {
 
 .multi-item:hover {
   background: linear-gradient(135deg, #2b3747, #222b36);
-  border-color: #38bdf8; /* ホバー時にスカイブルーがシャープに光る */
+
+  border-color: #38bdf8;
+}
+
+.multi-item.gundam-base-item {
+  border-color: #eab308;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.multi-item.gundam-base-item:hover {
+  border-color: #facc15;
+}
+
+.multi-item.premium-item {
+  border-color: #f43f5e;
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.25);
+}
+
+.multi-item.premium-item:hover {
+  border-color: #fb7185;
 }
 
 .multi-item:active {
@@ -238,7 +279,6 @@ h1 {
   margin-right: 12px;
 }
 
-/* 価格とボタンをまとめるエリア */
 .item-right-area {
   display: flex;
   align-items: center;
@@ -250,10 +290,9 @@ h1 {
   font-family: monospace;
   font-weight: 600;
   font-size: 14px;
-  color: #38bdf8; /* メタリックに映えるアイスブルー */
+  color: #38bdf8;
 }
 
-/* 「link」ボタンのスタイル */
 .item-link-btn {
   width: 30px;
   height: 26px;
@@ -280,7 +319,6 @@ h1 {
   color: #0f172a;
 }
 
-/* 「変更」ボタンのスタイル */
 .item-edit-btn {
   width: 30px;
   height: 26px;
@@ -329,30 +367,25 @@ h1 {
   transform: rotate(2deg);
 }
 
-/* --- モーダルの背景（半透明のダーク幕） --- */
+/* --- モーダルの背景 --- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(
-    15,
-    23,
-    42,
-    0.6
-  ); /* 暗すぎない半透明のダークブルーグレー */
+  background-color: rgba(15, 23, 42, 0.6);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-left: 50px;
-  z-index: 1000; /* 他の要素より手前に表示する */
+  z-index: 1000;
 }
 
-/* --- モーダル本体のウィンドウ（視認性の高い明るめグレー＆シルバー調） --- */
+/* --- モーダル本体のウィンドウ --- */
 .modal-content {
-  background-color: #1e293b; /* 視認性を保ちつつ重すぎないスレート色 */
-  border: 1px solid #475569; /* シャープなシルバー系の枠線 */
+  background-color: #1e293b;
+  border: 1px solid #475569;
   padding: 24px 32px;
   border-radius: 12px;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
@@ -385,14 +418,14 @@ h1 {
 .form-group label {
   font-size: 14px;
   font-weight: 600;
-  color: #cbd5e1; /* 読みやすい明るめのグレー */
+  color: #cbd5e1;
 }
 
 .form-group input,
 .form-group textarea {
   padding: 10px 12px;
   font-size: 14px;
-  background-color: #0f172a; /* 入力欄はコントラストをつけるために少し暗く */
+  background-color: #0f172a;
   border: 1px solid #475569;
   color: #f8fafc;
   border-radius: 6px;
@@ -465,9 +498,9 @@ h1 {
 /* --- 削除ボタンのスタイル --- */
 .delete-btn {
   padding: 8px 16px;
-  background-color: rgba(239, 68, 68, 0.15); /* ほんのり赤みがかった背景 */
-  color: #f87171; /* 視認性の良い明るめの赤文字 */
-  border: 1px solid rgba(239, 68, 68, 0.4); /* シャープな赤系ボーダー */
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
@@ -477,7 +510,7 @@ h1 {
 }
 
 .delete-btn:hover {
-  background-color: #ef4444; /* ホバー時はしっかりした赤に変化 */
+  background-color: #ef4444;
   color: #fff;
   border-color: #ef4444;
 }

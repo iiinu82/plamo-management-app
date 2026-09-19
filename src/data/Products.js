@@ -6,10 +6,18 @@ export const initialProducts = [
     url: "https://bandai-hobby.net/item/01_370/",
   },
   {
+    id: "P002",
+    name: "HG 1/144 ガンダムアスクレプオス",
+    price: 4180,
+    url: "https://bandai-hobby.net/item/01_3798/",
+    isPremium: true,
+  },
+  {
     id: "P030",
     name: "HG 1/144 インフィニットジャスティスガンダム弐式 [クリアカラー]",
     price: 4850,
     url: "https://www.gundam-base.net/products/details.php?path=01_6743",
+    isGundamBase: true,
   },
   {
     id: "P031",
@@ -40,11 +48,13 @@ export const initialProducts = [
     name: "RG 1/144 MSN-04FF サザビー",
     price: 8910,
     url: "https://www.gundam-base.net/products/details.php?path=01_4933",
+    isGundamBase: true,
   },
   {
     id: "P036",
     name: "MG 1/100 ウイングガンダムゼロEW [CROSS CONTRAST COLORS / CLEAR PURPLE",
     price: 7150,
     url: "https://www.gundam-base.net/products/details.php?path=01_6683",
+    isGundamBase: true,
   },
 ];

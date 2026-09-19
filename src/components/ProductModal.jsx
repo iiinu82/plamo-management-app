@@ -6,8 +6,8 @@ export function ProductModal({
   formData,
   onChange,
   onSubmit,
-  onDelete, // ★ 削除用の関数を新しく受け取る
-  isEditing, // ★ 編集モードかどうか（true/false）
+  onDelete, // 削除用の関数
+  isEditing, // 編集モードかどうか
 }) {
   if (!isOpen) return null;
 
@@ -17,7 +17,6 @@ export function ProductModal({
         <h2>
           {isEditing ? "プラモデル情報の変更・削除" : "プラモデル新規登録"}
         </h2>
-
         <form onSubmit={onSubmit} className="modal-form">
           <div className="form-group">
             <label>商品名</label>
@@ -54,6 +53,48 @@ export function ProductModal({
             />
           </div>
 
+          {/* ★ 追加：ガンダムベース・プレバンのチェックボックスエリア */}
+          <div
+            className="form-group checkbox-group"
+            style={{ flexDirection: "row", gap: "20px", alignItems: "center" }}
+          >
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                cursor: "pointer",
+              }}
+            >
+              <input
+                type="checkbox"
+                name="isGundamBase"
+                checked={Boolean(formData.isGundamBase)}
+                onChange={onChange}
+                style={{ width: "16px", height: "16px", cursor: "pointer" }}
+              />
+              ガンダムベース限定
+            </label>
+
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                cursor: "pointer",
+              }}
+            >
+              <input
+                type="checkbox"
+                name="isPremium"
+                checked={Boolean(formData.isPremium)}
+                onChange={onChange}
+                style={{ width: "16px", height: "16px", cursor: "pointer" }}
+              />
+              プレミアムバンダイ
+            </label>
+          </div>
+
           <div className="modal-actions">
             {/* 編集モードのときだけ「削除」ボタンを表示 */}
             {isEditing && (
@@ -61,7 +102,6 @@ export function ProductModal({
                 削除
               </button>
             )}
-
             <div className="right-actions">
               <button type="button" onClick={onClose} className="cancel-btn">
                 キャンセル

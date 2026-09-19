@@ -18,7 +18,7 @@ export function Column({ id, title, items, onEdit }) {
           strategy={verticalListSortingStrategy}
         >
           {items.map((item) => (
-            <SortableItem key={item.id} {...item} onEdit={onEdit} />
+            <SortableItem key={item.id} {...item} onEdit={() => onEdit(item)} />
           ))}
         </SortableContext>
         {items.length === 0 && (

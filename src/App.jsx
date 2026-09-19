@@ -33,6 +33,8 @@ const loadInitialContainers = () => {
       name: p.name,
       price: p.price,
       url: p.url,
+      isGundamBase: p.isGundamBase || false,
+      isPremium: p.isPremium || false,
     })),
     center: [],
     right: [],
@@ -56,6 +58,8 @@ function App() {
     name: "",
     price: "",
     url: "",
+    isGundamBase: false,
+    isPremium: false,
   });
 
   // データの変更があるたびに localStorage に自動保存する
@@ -179,18 +183,31 @@ function App() {
 
   // 変更ボタンを押した時。item情報を引数で渡し、エディットIDを設定、フォームデータを入れる、モーダルをオープン
   const handleOpenEditModal = (item) => {
+    console.log("クリックされたアイテムの中身：", item); // ← これを入れてみる
     setEditingId(item.id);
-    setFormData({ name: item.name, price: item.price, url: item.url });
+    setFormData({
+      name: item.name,
+      price: item.price,
+      url: item.url,
+      isGundamBase: item.isGundamBase || false,
+      isPremium: item.isPremium || false,
+    });
     setIsModalOpen(true);
   };
 
   // フォーム入力値の変更ハンドラー
   const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, type, checked, value } = e.target;
+    setFormData((prev) => {
+      const updated = {
+        ...prev,
+        [name]: type === "checkbox" ? checked : value,
+      };
+
+      if (name === "isGundamBase" && checked) updated.isPremium = false;
+      if (name === "isPremium" && checked) updated.isGundamBase = false;
+      return updated;
+    });
   };
 
   // 登録の関数。エディットIDがあるなら編集モード
@@ -208,6 +225,8 @@ function App() {
                   name: formData.name,
                   price: Number(formData.price) || 0,
                   url: formData.url,
+                  isGundamBase: formData.isGundamBase,
+                  isPremium: formData.isPremium,
                 }
               : item,
           );
@@ -225,6 +244,8 @@ function App() {
         name: formData.name,
         price: Number(formData.price) || 0,
         url: formData.url,
+        isGundamBase: formData.isGundamBase,
+        isPremium: formData.isPremium,
       };
 
       setContainers((prev) => ({
@@ -235,7 +256,13 @@ function App() {
 
     setIsModalOpen(false);
     setEditingId(null);
-    setFormData({ name: "", price: "", url: "" });
+    setFormData({
+      name: "",
+      price: "",
+      url: "",
+      isGundamBase: false,
+      isPremium: false,
+    });
   };
 
   const handleDeleteItem = () => {
@@ -261,10 +288,13 @@ function App() {
   return (
     <>
       <div className="appContainer">
-        <h1>プラモデル管理アプリ</h1>
+        <h1>
+          PLASTIC MODEL MANAGEMENT APP
+          <span className="titleSpan">// VERSION 1.0</span>
+        </h1>
         <div className="header">
           <div className="addArea">
-            <button onClick={handleOpenAddModal} className="addBtn greenbtn">
+            <button onClick={handleOpenAddModal} className="addBtn">
               +
             </button>
             <span className="addText">新規追加</span>
@@ -284,19 +314,19 @@ function App() {
           <div className="listArea">
             <Column
               id="left"
-              title="製品一覧"
+              title="INVENTORY（所持一覧）"
               items={containers.left}
               onEdit={handleOpenEditModal}
             />
             <Column
               id="center"
-              title="作成中"
+              title="BUILDING（作成中）"
               items={containers.center}
               onEdit={handleOpenEditModal}
             />
             <Column
               id="right"
-              title="完成済み"
+              title="COMPLETED（完成済み）"
               items={containers.right}
               onEdit={handleOpenEditModal}
             />
@@ -311,6 +341,9 @@ function App() {
                   <span className="item-price">
                     ¥{activeItem.price.toLocaleString()}
                   </span>
+                  <button type="button" className="item-edit-btn">
+                    edit
+                  </button>
                   {activeItem.url && <a className="item-link-btn">link</a>}
                 </div>
               </div>

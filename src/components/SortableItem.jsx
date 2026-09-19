@@ -1,7 +1,8 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export function SortableItem({ id, name, price, url, onEdit }) {
+export function SortableItem({ onEdit, ...item }) {
+  const { id, name, price, url, isGundamBase, isPremium } = item;
   const {
     attributes,
     listeners,
@@ -17,21 +18,15 @@ export function SortableItem({ id, name, price, url, onEdit }) {
     opacity: isDragging ? 0.4 : 1, // ドラッグ中は半透明にする
   };
 
-  const handleOpenPopup = (e) => {
-    e.preventDefault(); // デフォルトのリンク動作を制御
-    if (!url) return;
-
-    // ポップアップ指定を外し、安全な新しいタブで開く
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <div
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      className="multi-item"
+      className={`multi-item ${
+        isGundamBase ? "gundam-base-item" : isPremium ? "premium-item" : ""
+      }`}
     >
       <span className="item-name">{name}</span>
       <div className="item-right-area">
@@ -39,7 +34,7 @@ export function SortableItem({ id, name, price, url, onEdit }) {
         <button
           type="button"
           className="item-edit-btn"
-          onClick={() => onEdit({ id, name, price, url })}
+          onClick={() => onEdit(item)}
           onPointerDown={(e) => e.stopPropagation()} // ドラッグ暴発防止
           title="編集する"
         >
