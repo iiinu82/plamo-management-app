@@ -335,7 +335,15 @@ function App() {
           {/* ドラッグ中にマウスに追従するプレビュー表示 */}
           <DragOverlay>
             {activeItem ? (
-              <div className="multi-item dragging-overlay">
+              <div
+                className={`multi-item dragging-overlay ${
+                  activeItem.isGundamBase
+                    ? "gundam-base-item"
+                    : activeItem.isPremium
+                      ? "premium-item"
+                      : ""
+                }`}
+              >
                 <span className="item-name">{activeItem.name}</span>
                 <div className="item-right-area">
                   <span className="item-price">

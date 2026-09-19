@@ -243,7 +243,7 @@ h1 {
 .multi-item:hover {
   background: linear-gradient(135deg, #2b3747, #222b36);
 
-  border-color: #38bdf8;
+  /* border-color: #38bdf8; */
 }
 
 .multi-item.gundam-base-item {
@@ -253,7 +253,7 @@ h1 {
 }
 
 .multi-item.gundam-base-item:hover {
-  border-color: #facc15;
+  /* border-color: #facc15; */
 }
 
 .multi-item.premium-item {
@@ -262,7 +262,7 @@ h1 {
 }
 
 .multi-item.premium-item:hover {
-  border-color: #fb7185;
+  /* border-color: #fb7185; */
 }
 
 .multi-item:active {
@@ -361,9 +361,8 @@ h1 {
 
 /* ドラッグ中のプレビュー（影） */
 .dragging-overlay {
-  background: linear-gradient(135deg, #334155, #1e293b);
+  background: linear-gradient(135deg, #2b3747, #222b36);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-  border: 1px solid #38bdf8;
   transform: rotate(2deg);
 }
 
